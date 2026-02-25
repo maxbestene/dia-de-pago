@@ -175,24 +175,33 @@ function handleBackToInstallments() { showScreen('installments', 'backward'); }
 
 // ===== PAYMENT DAY SCREEN =====
 function openPaymentDayScreen() {
-    // Resetear animación AI para que se vea cada vez que se abre
     const aiSkeleton = document.getElementById('aiSkeleton');
     const aiText = document.getElementById('aiSuggestionText');
-    if (aiSkeleton && aiText) {
-        aiSkeleton.classList.remove('hidden');
-        aiText.classList.remove('visible');
-    }
+
+    // Resetear animación AI
+    if (aiSkeleton) aiSkeleton.classList.remove('hidden');
+    if (aiText) aiText.classList.remove('visible');
 
     renderDaysPicker();
     showScreen('paymentDay');
 
-    // Skeleton visible ~1.5s, luego fade in del texto
+    // 1500ms: ocultar skeleton
     setTimeout(() => {
         if (aiSkeleton) aiSkeleton.classList.add('hidden');
-        setTimeout(() => {
-            if (aiText) aiText.classList.add('visible');
-        }, 250);
     }, 1500);
+
+    // 1750ms: mostrar texto AI
+    setTimeout(() => {
+        if (aiText) aiText.classList.add('visible');
+    }, 1750);
+
+    // 1950ms+: stagger border reveal en días sugeridos (1–9)
+    const suggestedDays = daysPicker.querySelectorAll('.day-suggested');
+    suggestedDays.forEach((el, i) => {
+        setTimeout(() => {
+            el.classList.add('border-visible');
+        }, 1950 + i * 60);
+    });
 
     if (navigator.vibrate) navigator.vibrate(10);
 }
@@ -217,6 +226,7 @@ function renderDaysPicker() {
         button.className = 'day-option';
         button.textContent = day;
         if (day === selectedDay) button.classList.add('selected');
+        if (day <= 9) button.classList.add('day-suggested');
         button.addEventListener('click', () => selectDay(day));
         daysPicker.appendChild(button);
     }

@@ -1479,7 +1479,7 @@ button {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 12px;
-    padding: 8px 0;
+    padding: 4px 2px;
     margin-top: var(--space-lg);
 }
 
@@ -1515,6 +1515,19 @@ button {
 
 .day-option.selected:hover {
     background-color: #3840c5;
+}
+
+.day-option.day-suggested {
+    box-shadow: 0 0 0 0 rgba(129, 140, 248, 0);
+    transition: all 0.2s, box-shadow 0.4s ease;
+}
+
+.day-option.day-suggested.border-visible {
+    box-shadow: 0 0 0 1.5px #818CF8;
+}
+
+.day-option.day-suggested.selected {
+    box-shadow: none;
 }
 
 /* ===== PAYMENT DAY FULLSCREEN ===== */
