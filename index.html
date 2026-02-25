@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alternativas - Día de Pago</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #434CE4;
+            --color-background: #F6F6F8;
+            --color-white: #FFFFFF;
+            --color-text-primary: #282834;
+            --color-text-secondary: #646587;
+            --color-border: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FFFFFF;
+            color: var(--color-text-primary);
+            min-height: 100vh;
+            padding: 80px 40px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-text-primary);
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 32px;
+        }
+
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 32px;
+        }
+
+        .alternative-card {
+            background: #F3F4F6;
+            border-radius: 32px;
+            padding: 40px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+        }
+
+        .alternative-card:hover {
+            background: #E5E7EB;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            transition: transform 0.4s ease;
+        }
+
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .alternative-card:hover .card-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Card with variants styles */
+        .alternative-card-with-variants {
+            cursor: default;
+        }
+
+        .alternative-card-with-variants .card-content {
+            transition: transform 0.4s ease;
+        }
+
+        .alternative-card-with-variants:hover .card-content {
+            transform: translateY(-120px);
+        }
+
+        .card-variants {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+        }
+
+        .alternative-card-with-variants {
+            position: relative;
+        }
+
+        .alternative-card-with-variants:hover .card-variants {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .alternative-card-with-variants .card-description {
+            transition: opacity 0.3s ease;
+        }
+
+        .alternative-card-with-variants:hover .card-description {
+            opacity: 0;
+        }
+
+        .variant-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .variant-link:hover {
+            transform: translateX(4px);
+        }
+
+        .variant-primary {
+            font-weight: 600;
+        }
+
+        .variant-secondary {
+            font-weight: 400;
+        }
+
+        .variant-link .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .variant-link:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .scale-down {
+            animation: scaleDown 0.3s ease forwards;
+        }
+
+        @keyframes scaleDown {
+            to {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .alternative-card-with-variants .card-content,
+        .alternative-card-simple .card-content {
+            margin-top: auto;
+        }
+
+        .card-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+        }
+
+        .card-description {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+
+            .hero {
+                margin-bottom: 60px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .alternatives-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="hero-title">Experiencia cambio de fecha de pago en simulador</h1>
+            <p class="hero-description">Explorá diferentes alternativas de interfaz para que los usuarios elijan su día de pago preferido al solicitar un crédito.</p>
+        </div>
+
+        <!-- Alternatives Section -->
+        <div class="alternatives-grid">
+            <!-- Alternative 1 -->
+            <div class="alternative-card alternative-card-with-variants">
+                <div class="card-icon">
+                    <svg width="58" height="57" viewBox="0 0 58 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.1106 4.53075C24.6368 -1.50934 33.2186 -1.50934 34.7449 4.53075L35.1244 6.0327C36.0405 9.6581 40.0136 11.5715 43.4193 10.0273L44.8302 9.38757C50.5041 6.81492 55.8548 13.5244 52.084 18.4836L51.1464 19.7168C48.8831 22.6935 49.8644 26.9927 53.1951 28.6926L54.5749 29.3968C60.1239 32.2289 58.2143 40.5955 51.986 40.7394L50.4373 40.7752C46.6989 40.8616 43.9494 44.3094 44.6971 47.9732L45.0068 49.4911C46.2524 55.5953 38.5205 59.3188 34.5246 54.539L33.531 53.3505C31.1327 50.4816 26.7228 50.4816 24.3244 53.3505L23.3308 54.539C19.335 59.3188 11.6031 55.5953 12.8487 49.4911L13.1584 47.9732C13.906 44.3094 11.1565 40.8616 7.41819 40.7752L5.86944 40.7394C-0.358841 40.5955 -2.26847 32.2289 3.28056 29.3968L4.6604 28.6926C7.99105 26.9927 8.97233 22.6935 6.70906 19.7168L5.77142 18.4836C2.0007 13.5244 7.35135 6.81492 13.0253 9.38757L14.4362 10.0273C17.8418 11.5715 21.815 9.65811 22.7311 6.03271L23.1106 4.53075Z" fill="#151515"/>
+                </div>
+                <div class="card-content">
+                    <div class="card-number">Alternativa 01</div>
+                    <h3 class="card-title">Calendario por meses</h3>
+                    <p class="card-description">Selector con calendario mensual que permite elegir la fecha específica del primer pago dentro de un rango de 15 a 45 días.</p>
+                </div>
+                <div class="card-variants">
+                    <a href="calendario-por-meses.html" class="variant-link variant-primary">
+                        Bottomsheet <span class="arrow">→</span>
+                    </a>
+                    <a href="calendario-pantalla-completa.html" class="variant-link variant-secondary">
+                        Nueva pantalla <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Alternative 2 -->
+            <div class="alternative-card alternative-card-with-variants">
+                <div class="card-icon">
+                    <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M31.0838 3.91797C33.0168 -1.30574 40.4051 -1.30574 42.338 3.91797L48.7178 21.1591C49.3256 22.8014 50.6204 24.0963 52.2627 24.704L69.5039 31.0838C74.7276 33.0168 74.7276 40.4051 69.5039 42.338L52.2627 48.7178C50.6204 49.3256 49.3256 50.6204 48.7179 52.2627L42.338 69.5039C40.4051 74.7276 33.0168 74.7276 31.0838 69.5039L24.704 52.2627C24.0963 50.6204 22.8014 49.3256 21.1591 48.7179L3.91797 42.338C-1.30574 40.4051 -1.30574 33.0168 3.91797 31.0838L21.1591 24.704C22.8014 24.0963 24.0963 22.8014 24.704 21.1591L31.0838 3.91797Z" fill="#151515"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="card-number">Alternativa 02</div>
+                    <h3 class="card-title">Día de pago</h3>
+                    <p class="card-description">Selector simple y directo que permite elegir un día del mes (1-28) sin referencia al calendario mensual.</p>
+                </div>
+                <div class="card-variants">
+                    <a href="dia-de-pago.html" class="variant-link variant-primary">
+                        Bottomsheet <span class="arrow">→</span>
+                    </a>
+                    <a href="dia-de-pago-pantalla-completa.html" class="variant-link variant-secondary">
+                        Nueva pantalla <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add scale down transition on card click (only for simple cards)
+        document.querySelectorAll('.alternative-card:not(.alternative-card-with-variants)').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+
+                // Add scale down animation
+                document.body.classList.add('scale-down');
+
+                // Navigate after animation completes
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 300);
+            });
+        });
+
+        // Add scale down transition for variant links
+        document.querySelectorAll('.variant-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+
+                // Add scale down animation to body
+                document.body.classList.add('scale-down');
+
+                // Navigate after animation completes
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

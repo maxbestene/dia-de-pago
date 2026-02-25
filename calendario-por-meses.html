@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Solicitud de Crédito</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-content">
+            <span class="time">12:30</span>
+            <div class="status-icons">
+                <svg class="icon-cellular" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.5834 1.41667L1.41675 15.5833H15.5834V1.41667V1.41667Z" fill="#282834"/>
+                </svg>
+                <svg class="icon-wifi" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.5 1.41667C5.1 1.41667 2.125 2.90417 0 5.24167L8.5 15.5833L17 5.24167C14.875 2.90417 11.9 1.41667 8.5 1.41667Z" fill="#282834"/>
+                </svg>
+                <svg class="icon-battery" width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.3" d="M5.5 0H2.5V1.5H1C0.447715 1.5 0 2.00368 0 2.625V13.875C0 14.4963 0.447715 15 1 15H7C7.55228 15 8 14.4963 8 13.875V2.625C8 2.00368 7.55228 1.5 7 1.5H5.5V0Z" fill="#282834"/>
+                    <path d="M6.17902e-06 8C-1.48833e-06 8.58333 1.46004e-07 13.3667 1.46004e-07 13.95C1.46004e-07 14.5299 0.447715 15 1 15H7C7.55228 15 8 14.5299 8 13.95C8 13.3667 8 8.58333 8 8H6.17902e-06Z" fill="#282834"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container" id="appContainer">
+        <!-- STEP 1: CALCULATOR -->
+        <div class="screen screen-calculator active" id="screenCalculator">
+            <!-- Header -->
+            <header class="header">
+                <button class="btn-back" aria-label="Volver">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Title Section -->
+            <div class="title-section">
+                <h1 class="main-title">Ingresa el monto</h1>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+            <!-- Amount Display -->
+            <div class="amount-container">
+                <div class="amount-display">
+                    <span class="currency-symbol">$</span>
+                    <span class="amount-value" id="amountValue">0</span>
+                    <span class="cursor"></span>
+                </div>
+
+                <!-- Helper Text -->
+                <div class="helper-text">
+                    <span class="helper-label">Pide hasta</span>
+                    <span class="helper-value">$ {0.000}</span>
+                    <svg class="icon-info" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 11V8M8 5H8.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <svg class="icon-error" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <circle cx="6" cy="6" r="6" fill="#CB4F06"/>
+                        <path d="M6 7.5V3.5M6 9.5V9.51" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="error-text" id="errorText"></span>
+                </div>
+
+                <!-- Installment Info -->
+                <div class="installment-info" id="installmentInfo" style="display: none;">
+                    <svg class="icon-installment" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="6" fill="#4850E5"/>
+                        <path d="M6 8L7.5 9.5L10 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="installment-text">Pagarás en [24] cuotas.</span>
+                </div>
+            </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="bottom-section">
+            <!-- Preset Button -->
+            <button class="btn-preset" id="btnPreset">
+                <span class="preset-text">$ {0.000}</span>
+                <svg class="preset-check" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <!-- Continue Button -->
+            <button class="btn-continue" id="btnContinue" disabled>
+                Continuar
+            </button>
+
+            <!-- Keyboard -->
+            <div class="keyboard">
+                <button class="key" data-key="1">1</button>
+                <button class="key" data-key="2">2</button>
+                <button class="key" data-key="3">3</button>
+                <button class="key" data-key="4">4</button>
+                <button class="key" data-key="5">5</button>
+                <button class="key" data-key="6">6</button>
+                <button class="key" data-key="7">7</button>
+                <button class="key" data-key="8">8</button>
+                <button class="key" data-key="9">9</button>
+                <button class="key" data-key="0">0</button>
+                <button class="key key-delete" data-key="delete">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6.53451 3C6.12132 3 5.72528 3.17028 5.43934 3.47228L3.3902 5.63592C3.14202 5.89715 3 6.24882 3 6.61456V17.3854C3 17.7512 3.14202 18.1028 3.3902 18.3641L5.43934 20.5277C5.72528 20.8297 6.12132 21 6.53451 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H6.53451Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M13.5 9.5L10.5 12.5M10.5 9.5L13.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Home Indicator -->
+            <div class="home-indicator"></div>
+            </div>
+        </div>
+
+        <!-- STEP 2: INSTALLMENTS SELECTOR -->
+        <div class="screen screen-installments" id="screenInstallments">
+            <!-- Header -->
+            <header class="header header-installments">
+                <button class="btn-back" id="btnBackInstallments" aria-label="Volver">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="btn-help" aria-label="Ayuda">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6.0026C8.73583 6.0026 7.70833 7.03094 7.70833 8.29427C7.70833 8.63927 7.98833 8.91927 8.33333 8.91927C8.67833 8.91927 8.95833 8.63927 8.95833 8.29427C8.95833 7.7201 9.42583 7.2526 10 7.2526C10.5742 7.2526 11.0417 7.7201 11.0417 8.29427C11.0417 8.60677 10.9033 8.8051 10.4933 9.08177C9.9725 9.43177 9.375 9.95927 9.375 10.9334V11.1418C9.375 11.4868 9.655 11.7668 10 11.7668C10.345 11.7668 10.625 11.4868 10.625 11.1418V10.9334C10.625 10.6093 10.7675 10.4034 11.1917 10.1184L11.1932 10.1174C11.4952 9.9133 12.2917 9.37496 12.2917 8.29427C12.2917 7.03094 11.2642 6.0026 10 6.0026Z" fill="#434CE4"/>
+                        <path d="M9.40836 13.0543C9.56586 12.8951 9.77502 12.8084 9.99919 12.8084C10.4592 12.8084 10.8334 13.1818 10.8334 13.6418C10.8334 14.1018 10.4592 14.4751 10 14.4751C9.54086 14.4751 9.16669 14.1018 9.16669 13.6418C9.16502 13.4226 9.25086 13.2134 9.40836 13.0543Z" fill="#434CE4"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.9751C5.52 1.9751 1.875 5.6201 1.875 10.1001C1.875 14.5801 5.52 18.2251 10 18.2251C14.48 18.2251 18.125 14.5801 18.125 10.1001C18.125 5.6201 14.48 1.9751 10 1.9751ZM10 16.9751C6.20917 16.9751 3.125 13.8909 3.125 10.1001C3.125 6.30926 6.20917 3.2251 10 3.2251C13.7908 3.2251 16.875 6.30926 16.875 10.1001C16.875 13.8909 13.7908 16.9751 10 16.9751Z" fill="#434CE4"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Title Section -->
+            <div class="title-section">
+                <h1 class="main-title">Elige las cuotas</h1>
+                <p class="subtitle" id="amountRequested">Estás pidiendo: $ 0</p>
+            </div>
+
+            <!-- Installments List -->
+            <div class="installments-container">
+                <div class="installments-list" id="installmentsList">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
+
+                <!-- Payment Day Selector -->
+                <div class="payment-day-card">
+                    <div class="payment-day-content">
+                        <svg class="payment-day-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.0037 3.12193H14.3771V2.49609C14.3771 2.15109 14.0971 1.87109 13.7521 1.87109C13.4071 1.87109 13.1271 2.15109 13.1271 2.49609V3.12193H6.87374V2.49609C6.87374 2.15109 6.59374 1.87109 6.24874 1.87109C5.90374 1.87109 5.62374 2.15109 5.62374 2.49609V3.12193H4.99707C3.27374 3.12193 1.87207 4.52359 1.87207 6.24693V15.0028C1.87207 16.7253 3.27374 18.1278 4.99707 18.1278H15.0037C16.7262 18.1278 18.1287 16.7253 18.1287 15.0028V6.24693C18.1287 4.52359 16.7262 3.12193 15.0037 3.12193ZM4.99707 4.37193H5.62374V4.99693C5.62374 5.34193 5.90374 5.62193 6.24874 5.62193C6.59374 5.62193 6.87374 5.34193 6.87374 4.99693V4.37193H13.1271V4.99693C13.1271 5.34193 13.4071 5.62193 13.7521 5.62193C14.0971 5.62193 14.3771 5.34193 14.3771 4.99693V4.37193H15.0037C16.0371 4.37193 16.8787 5.21276 16.8787 6.24693V7.29026H3.12207V6.24693C3.12207 5.21276 3.9629 4.37193 4.99707 4.37193ZM15.0037 16.8778H4.99707C3.9629 16.8778 3.12207 16.0361 3.12207 15.0028V8.54026H16.8787V15.0028C16.8787 16.0361 16.0371 16.8778 15.0037 16.8778Z" fill="#282834"/>
+                        </svg>
+                        <div class="payment-day-info">
+                            <span class="payment-day-label">Fecha de la primera cuota</span>
+                            <span class="payment-day-value" id="paymentDayValue">7 de abril</span>
+                        </div>
+                    </div>
+                    <button class="btn-modify" id="btnModifyPaymentDay">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: FEEDBACK SUCCESS -->
+        <div class="screen screen-feedback" id="screenFeedback">
+            <!-- Close Button -->
+            <button class="btn-close" id="btnClose" aria-label="Cerrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <!-- Content -->
+            <div class="feedback-content">
+                <!-- Success Icon -->
+                <div class="feedback-icon">
+                    <img src="Illustration slot.png" alt="Billetes" class="feedback-image">
+                    <div class="feedback-check">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="path-1-inside-1_725_51427" fill="white">
+                                <path d="M0 24C0 10.7452 10.7452 0 24 0V0C37.2548 0 48 10.7452 48 24V24C48 37.2548 37.2548 48 24 48V48C10.7452 48 0 37.2548 0 24V24Z"/>
+                            </mask>
+                            <path d="M0 24C0 10.7452 10.7452 0 24 0V0C37.2548 0 48 10.7452 48 24V24C48 37.2548 37.2548 48 24 48V48C10.7452 48 0 37.2548 0 24V24Z" fill="#1F8923"/>
+                            <path d="M0 24M48 24M48 24M0 24M24 0M48 24M24 48M0 24M24 48V46C11.8497 46 2 36.1503 2 24H0H-2C-2 38.3594 9.6406 50 24 50V48ZM48 24H46C46 36.1503 36.1503 46 24 46V48V50C38.3594 50 50 38.3594 50 24H48ZM24 0V2C36.1503 2 46 11.8497 46 24H48H50C50 9.6406 38.3594 -2 24 -2V0ZM24 0V-2C9.6406 -2 -2 9.6406 -2 24H0H2C2 11.8497 11.8497 2 24 2V0Z" fill="white" mask="url(#path-1-inside-1_725_51427)"/>
+                            <path d="M32.8136 16.1648C33.4644 15.5139 34.5211 15.5139 35.1719 16.1648C35.8223 16.8156 35.8224 17.8708 35.1719 18.5216L21.8581 31.8354C21.5456 32.1478 21.1217 32.3236 20.6798 32.3236C20.2378 32.3236 19.8139 32.1478 19.5014 31.8354L12.8282 25.1622C12.1774 24.5114 12.1775 23.4563 12.8282 22.8054C13.4791 22.1545 14.5341 22.1545 15.185 22.8054L20.6781 28.2986L32.8136 16.1648Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h1 class="feedback-title">Ya tienes los <span id="feedbackAmount">$ 0</span> en tu cuenta</h1>
+
+                <!-- Due Date Info -->
+                <div class="feedback-info">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="path-1-inside-1_711_49046" fill="white">
+                            <path d="M0 20C0 8.95431 8.95431 0 20 0C31.0457 0 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.95431 40 0 31.0457 0 20Z"/>
+                        </mask>
+                        <path d="M0 20C0 8.95431 8.95431 0 20 0C31.0457 0 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.95431 40 0 31.0457 0 20Z" fill="white"/>
+                        <path d="M20 40V38C10.0589 38 2 29.9411 2 20H0H-2C-2 32.1503 7.84974 42 20 42V40ZM40 20H38C38 29.9411 29.9411 38 20 38V40V42C32.1503 42 42 32.1503 42 20H40ZM20 0V2C29.9411 2 38 10.0589 38 20H40H42C42 7.84974 32.1503 -2 20 -2V0ZM20 0V-2C7.84974 -2 -2 7.84974 -2 20H0H2C2 10.0589 10.0589 2 20 2V0Z" fill="#D0D4E6" mask="url(#path-1-inside-1_711_49046)"/>
+                        <path d="M26.0041 11.7471H25.2521V10.9961C25.2521 10.5821 24.9161 10.2461 24.5021 10.2461C24.0881 10.2461 23.7521 10.5821 23.7521 10.9961V11.7471H16.2481V10.9961C16.2481 10.5821 15.9121 10.2461 15.4981 10.2461C15.0841 10.2461 14.7481 10.5821 14.7481 10.9961V11.7471H13.9961C11.9281 11.7471 10.2461 13.4291 10.2461 15.4971V26.0041C10.2461 28.0711 11.9281 29.7541 13.9961 29.7541H26.0041C28.0711 29.7541 29.7541 28.0711 29.7541 26.0041V15.4971C29.7541 13.4291 28.0711 11.7471 26.0041 11.7471ZM13.9961 13.2471H14.7481V13.9971C14.7481 14.4111 15.0841 14.7471 15.4981 14.7471C15.9121 14.7471 16.2481 14.4111 16.2481 13.9971V13.2471H23.7521V13.9971C23.7521 14.4111 24.0881 14.7471 24.5021 14.7471C24.9161 14.7471 25.2521 14.4111 25.2521 13.9971V13.2471H26.0041C27.2441 13.2471 28.2541 14.2561 28.2541 15.4971V16.7491H11.7461V15.4971C11.7461 14.2561 12.7551 13.2471 13.9961 13.2471ZM26.0041 28.2541H13.9961C12.7551 28.2541 11.7461 27.2441 11.7461 26.0041V18.2491H28.2541V26.0041C28.2541 27.2441 27.2441 28.2541 26.0041 28.2541Z" fill="black"/>
+                    </svg>
+                    <p class="feedback-info-text">La fecha de vencimiento de tu crédito es el <span id="feedbackDueDate">18</span> de cada mes</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="feedback-actions">
+                <button class="btn-primary-action" id="btnGoToMoney">
+                    Ir a Tu dinero
+                </button>
+                <a href="#" class="link-secondary" id="btnGoToHome">
+                    Ir al inicio
+                </a>
+            </div>
+        </div>
+
+        <!-- STEP 3: REVISA Y CONFIRMA -->
+        <div class="screen screen-review" id="screenReview">
+            <!-- Header -->
+            <header class="header">
+                <button class="btn-back" id="btnBackReview" aria-label="Volver">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Title Section -->
+            <div class="title-section">
+                <h1 class="main-title">Revisa y acepta tu crédito</h1>
+            </div>
+
+            <!-- Content Container -->
+            <div class="review-container">
+                <!-- Amount Received -->
+                <div class="review-section">
+                    <h2 class="review-heading">Recibes <span id="reviewAmountReceived">$ 0</span></h2>
+                </div>
+
+                <!-- Loan Details -->
+                <div class="review-section review-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Interés total</span>
+                        <span class="detail-value" id="reviewInterest">$ 0,00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">IVA</span>
+                        <span class="detail-value" id="reviewIVA">$ 0,00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Devuelves</span>
+                        <span class="detail-value" id="reviewTotalReturn">$ 0,00</span>
+                    </div>
+                    <div class="detail-row detail-row-payment">
+                        <span class="detail-label">Pagas</span>
+                        <span class="detail-value" id="reviewPaymentPlan">12x $ 0,00</span>
+                    </div>
+                    <a href="#" class="review-link" id="btnViewPaymentPlan">
+                        Revisar plan de pagos →
+                    </a>
+                </div>
+
+                <!-- Due Date -->
+                <div class="review-section review-due-date">
+                    <div class="due-date-header">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M3 8H17" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M7 3V5M13 3V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="due-date-text" id="reviewDueDate">Tu primer pago es el 18 de marzo</span>
+                    </div>
+                    <p class="due-date-helper" id="reviewDueDateHelper">Las próximas cuotas vencerán el 18 de cada mes. Si cae en día feriado o fin de semana, se moverá al próximo día hábil.</p>
+                </div>
+
+                <!-- Insurance Card -->
+                <div class="review-section review-insurance">
+                    <div class="insurance-card">
+                        <svg class="insurance-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.90186 4.30057C8.17791 4.30057 8.40172 4.52454 8.40186 4.80057V5.01053C8.99158 5.13502 9.50427 5.52265 9.77686 6.08182C9.8978 6.33006 9.79462 6.62982 9.54639 6.75077C9.29822 6.87164 8.99943 6.76837 8.87842 6.5203C8.70346 6.16121 8.32889 5.94237 7.93018 5.96659C7.925 5.9669 7.91975 5.96545 7.91455 5.96561C7.91031 5.96572 7.90612 5.96756 7.90186 5.96756C7.89429 5.96756 7.88688 5.96497 7.87939 5.96463C7.86798 5.96419 7.8565 5.96587 7.84521 5.96463C7.39421 5.91564 6.98478 6.22332 6.90186 6.66483C6.91548 6.91734 7.09768 7.13036 7.34814 7.18045L8.64795 7.4412C9.37568 7.58674 9.89972 8.22546 9.8999 8.96756C9.8999 8.99089 9.89827 9.01478 9.89502 9.03788C9.78111 9.84574 9.16419 10.4588 8.40186 10.6053V10.8015C8.40168 11.0775 8.17789 11.3015 7.90186 11.3015C7.62597 11.3014 7.40203 11.0774 7.40186 10.8015V10.5916C6.8105 10.468 6.29606 10.0808 6.02295 9.5203C5.90202 9.27206 6.00518 8.97229 6.25342 8.85135C6.50143 8.73066 6.80029 8.83405 6.92139 9.08182C7.07442 9.39593 7.38024 9.60298 7.72119 9.63358L7.86963 9.63553H7.88818C7.89273 9.63541 7.89728 9.63456 7.90186 9.63455C7.90841 9.63455 7.91489 9.63626 7.92139 9.63651L7.95459 9.63748C8.40601 9.68655 8.81455 9.37847 8.89697 8.93631C8.88272 8.68443 8.70165 8.47166 8.45166 8.42166L7.15186 8.1619C6.424 8.01632 5.8999 7.37682 5.8999 6.63455C5.89991 6.61137 5.90157 6.58818 5.90479 6.56522C6.01884 5.75583 6.63758 5.14014 7.40186 4.99491V4.80057C7.40199 4.52465 7.62595 4.30075 7.90186 4.30057Z" fill="black"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.45361 1.58475C7.80934 1.47367 8.19064 1.47374 8.54639 1.58475L12.8804 2.93827C13.6456 3.17742 14.1664 3.88652 14.1665 4.68827V7.17069C14.1663 10.3327 12.2046 13.1636 9.24365 14.2732L9.22803 14.2791C8.4369 14.5755 7.56427 14.576 6.77295 14.2801L6.75342 14.2723C3.88712 13.2002 1.95716 10.5132 1.83936 7.4744L1.8335 7.17948V4.68827C1.83361 3.88644 2.35525 3.17737 3.12061 2.93827L7.45361 1.58475ZM8.24854 2.53983C8.08676 2.48931 7.91324 2.4893 7.75146 2.53983L3.41846 3.89334C3.07066 4.00204 2.83361 4.32389 2.8335 4.68827V7.17948L2.83838 7.43631C2.94096 10.0733 4.61576 12.4052 7.10303 13.3357L7.12354 13.3435C7.68867 13.5549 8.31146 13.5542 8.87646 13.3426L8.89307 13.3367C11.4635 12.3733 13.1663 9.91573 13.1665 7.17069V4.68827C13.1664 4.3239 12.9293 4.00203 12.5815 3.89334L8.24854 2.53983Z" fill="black"/>
+                        </svg>
+                        <div class="insurance-title">Préstamo Protegido</div>
+                        <div class="insurance-pricing">
+                            <div class="insurance-price">$ 9,50 por 3 meses</div>
+                            <div class="insurance-subtitle">Después $ 100, 80/mes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interest Rates -->
+                <div class="review-section review-rates">
+                    <div class="rate-row">
+                        <span class="rate-label">Tasa Nominal Anual (tasa fija)</span>
+                        <span class="rate-value" id="reviewTNA">00,00%</span>
+                    </div>
+                    <div class="rate-row">
+                        <span class="rate-label">Tasa Efectiva Anual</span>
+                        <span class="rate-value" id="reviewTEA">00,00%</span>
+                    </div>
+                    <div class="rate-row">
+                        <span class="rate-label">Costo Financiero Total Efectivo Anual</span>
+                        <span class="rate-value" id="reviewCFTEA">00,00%</span>
+                    </div>
+                </div>
+
+                <!-- Legal Text -->
+                <div class="review-section review-legal">
+                    <p class="legal-text">Crédito otorgado por MercadoLibre S.R.L., domicilio Av. Caseros 3039 2º Piso CABA (1264), CUIT 30-70308853-4.</p>
+                    <p class="legal-text">Al aceptar, estás de acuerdo con los <a href="#" class="legal-link">Términos generales</a> y las <a href="#" class="legal-link">Condiciones particulares</a>.</p>
+                </div>
+
+                <!-- Accept Button -->
+                <div class="review-action">
+                    <button class="btn-accept" id="btnAccept">
+                        <span class="spinner"></span>
+                        <span class="btn-text">Aceptar crédito</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM SHEET: PAYMENT DAY PICKER -->
+        <div class="bottomsheet-overlay" id="paymentDayBottomsheet">
+        <div class="bottomsheet">
+            <!-- Header -->
+            <div class="bottomsheet-header">
+                <div class="bottomsheet-title-section">
+                    <h2 class="bottomsheet-title">Elige el día de tu primer pago</h2>
+                    <p class="bottomsheet-description" id="bottomsheetDescription">Este día se usará para tus próximos créditos.</p>
+                </div>
+                <button class="btn-dismiss" id="btnDismissBottomsheet" aria-label="Cerrar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Calendar -->
+            <div class="bottomsheet-content">
+                <!-- Month Selector -->
+                <div class="calendar-month-selector">
+                    <button class="btn-month-nav" id="btnPrevMonth" aria-label="Mes anterior">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <span class="calendar-month-label" id="calendarMonthLabel">Junio de 2025</span>
+                    <button class="btn-month-nav" id="btnNextMonth" aria-label="Mes siguiente">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="calendar">
+                    <!-- Week days -->
+                    <div class="calendar-weekdays">
+                        <span class="calendar-weekday">Lun</span>
+                        <span class="calendar-weekday">Mar</span>
+                        <span class="calendar-weekday">Mié</span>
+                        <span class="calendar-weekday">Jue</span>
+                        <span class="calendar-weekday">Vie</span>
+                        <span class="calendar-weekday">Sáb</span>
+                        <span class="calendar-weekday">Dom</span>
+                    </div>
+
+                    <!-- Days grid -->
+                    <div class="calendar-days" id="calendarDays">
+                        <!-- Days will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of app-container -->
+
+    <script src="script.js"></script>
+</body>
+</html>
