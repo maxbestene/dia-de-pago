@@ -596,7 +596,7 @@ button {
     padding: 16px;
     margin: 16px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     border: 1px solid #D1D5DB;
 }
@@ -622,9 +622,9 @@ button {
 }
 
 .payment-day-label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     line-height: 1.2;
 }
 
@@ -650,10 +650,11 @@ button {
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 0 0 0 12px;
     border-radius: 8px;
     transition: background-color 0.2s;
     flex-shrink: 0;
+    line-height: 1.2;
 }
 
 .btn-modify:active {
@@ -1535,6 +1536,7 @@ button {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: var(--color-background);
     /* Override default horizontal slide — use vertical instead */
     transform: translateY(100%);
     opacity: 1;

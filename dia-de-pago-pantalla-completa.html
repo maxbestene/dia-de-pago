@@ -129,21 +129,20 @@
             </div>
 
             <div class="installments-container">
-                <div class="installments-list" id="installmentsList"></div>
-
                 <div class="payment-day-card">
                     <div class="payment-day-content">
                         <svg class="payment-day-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.0037 3.12193H14.3771V2.49609C14.3771 2.15109 14.0971 1.87109 13.7521 1.87109C13.4071 1.87109 13.1271 2.15109 13.1271 2.49609V3.12193H6.87374V2.49609C6.87374 2.15109 6.59374 1.87109 6.24874 1.87109C5.90374 1.87109 5.62374 2.15109 5.62374 2.49609V3.12193H4.99707C3.27374 3.12193 1.87207 4.52359 1.87207 6.24693V15.0028C1.87207 16.7253 3.27374 18.1278 4.99707 18.1278H15.0037C16.7262 18.1278 18.1287 16.7253 18.1287 15.0028V6.24693C18.1287 4.52359 16.7262 3.12193 15.0037 3.12193ZM4.99707 4.37193H5.62374V4.99693C5.62374 5.34193 5.90374 5.62193 6.24874 5.62193C6.59374 5.62193 6.87374 5.34193 6.87374 4.99693V4.37193H13.1271V4.99693C13.1271 5.34193 13.4071 5.62193 13.7521 5.62193C14.0971 5.62193 14.3771 5.34193 14.3771 4.99693V4.37193H15.0037C16.0371 4.37193 16.8787 5.21276 16.8787 6.24693V7.29026H3.12207V6.24693C3.12207 5.21276 3.9629 4.37193 4.99707 4.37193ZM15.0037 16.8778H4.99707C3.9629 16.8778 3.12207 16.0361 3.12207 15.0028V8.54026H16.8787V15.0028C16.8787 16.0361 16.0371 16.8778 15.0037 16.8778Z" fill="#282834"/>
                         </svg>
                         <div class="payment-day-info">
-                            <span class="payment-day-label">Día de pago</span>
-                            <span class="payment-day-value" id="paymentDayValue">7 de cada mes</span>
+                            <span class="payment-day-value"><span class="payment-day-label">Día de pago: </span><span id="paymentDayValue">7 de cada mes</span></span>
                             <span class="payment-day-description" id="paymentDayDescription">Primera cuota el 7/mar.</span>
                         </div>
                     </div>
                     <button class="btn-modify" id="btnModifyPaymentDay">Modificar</button>
                 </div>
+
+                <div class="installments-list" id="installmentsList"></div>
             </div>
         </div>
 
@@ -294,7 +293,7 @@
                         <svg class="ai-spark-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 0C7.3 3.5 10.5 6.7 14 7C10.5 7.3 7.3 10.5 7 14C6.7 10.5 3.5 7.3 0 7C3.5 6.7 6.7 3.5 7 0Z" fill="currentColor"/>
                         </svg>
-                        <p class="subtitle calendar-subtitle">Según el volumen de tus ventas en el mes, el mejor día para tus pagos puede ser entre el 1 y el 9 del mes.</p>
+                        <p class="subtitle calendar-subtitle">Según el volumen de tus ventas en el mes, el mejor día para tus pagos puede ser entre el 1 y el 9.</p>
                     </div>
                 </div>
             </div>

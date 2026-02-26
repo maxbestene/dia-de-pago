@@ -169,6 +169,21 @@ function showScreen(screenName, direction = 'forward') {
         return;
     }
 
+    // Special case: paymentDay slides over installments — installments stays fixed
+    if (screenName === 'paymentDay') {
+        nextScreenEl.classList.add('active');
+        currentScreen = screenName;
+        return;
+    }
+    if (currentScreen === 'paymentDay') {
+        currentScreenEl.classList.add('exiting-back');
+        setTimeout(() => {
+            currentScreenEl.classList.remove('active', 'exiting', 'exiting-back');
+        }, 400);
+        currentScreen = screenName;
+        return;
+    }
+
     // Position next screen at starting point
     if (!isForward) {
         // Position at left without transition
